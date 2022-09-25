@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { fetchIndex } from "../api";
+import Directory from "../components/Directory.vue";
+import File from "../components/File.vue";
 
-const items = await fetchIndex();
+const { files, directories } = await fetchIndex();
 </script>
 
 <template>
-  {{ JSON.stringify(items) }}
+  <Directory v-for="directory in directories" :name="directory.name" />
+  <File v-for="file in files" :name="file.name" />
 </template>

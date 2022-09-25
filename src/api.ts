@@ -7,7 +7,9 @@ type IndexItem = {
 
 export async function fetchIndex() {
   const request = await fetch("https://uppi.fi/");
-  const files: IndexItem[] = await request.json();
+  const items: IndexItem[] = await request.json();
+  const files = items.filter(({ type }) => type === "file");
+  const directories = items.filter(({ type }) => type === "directory");
 
-  return files;
+  return { files, directories };
 }
